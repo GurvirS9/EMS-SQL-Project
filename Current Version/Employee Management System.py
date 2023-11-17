@@ -9,8 +9,6 @@ if mycon.is_connected():
     print('Connected to MSQL Successfully')
 else:
     print('Not Connected, Please rerun the program')
-    import sys
-    sys.exit()
 
 def createdb():
     gendetails = """
@@ -43,8 +41,7 @@ def createdb():
     CREATE TABLE IF NOT EXISTS Notes
     (EID INT,
     NID INT PRIMARY KEY,
-    Notes TEXT,
-    FOREIGN KEY (EID) REFERENCES GeneralDetails(EID))
+    Notes TEXT)
     """
     emergencyinfo = """
     CREATE TABLE IF NOT EXISTS EmergencyContactInfo
@@ -157,17 +154,16 @@ def removeemp():
 def updateemp():
     cursor.execute('USE EMS')
     eid = int(input('Enter EID of Employee to update: '))
-    tab = input(
-        'What detail do you want to update? (GeneralDetails, PersonalDetails, EmploymentDetails, Notes, EmergencyContactInfo): ')
-    cursor.execute("describe table '{}'".format(tab))
+    tab = input('What detail do you want to update? (GeneralDetails, PersonalDetails, EmploymentDetails, Notes, EmergencyContactInfo): ')
+    cursor.execute("describe {}".format(tab))
     for colname in cursor:
         print(colname[0])
-    cursor.execute("select * from '{}' where EID={}".format(tab, eid))
+    cursor.execute("select * from {} where EID={}".format(tab, eid))
     for rec in cursor:
         print(rec)
     field = input('Enter field you want to update: ')
     val = input('Enter the new value: ')
-    cursor.execute("update '{}' set {}='{}' where EID={}".format(tab, field, val, eid))
+    cursor.execute("update {} set {}='{}' where EID={}".format(tab, field, val, eid))
     mycon.commit()
     print('Record updated successfully')
 
@@ -283,7 +279,7 @@ def viewnotes():
 
 def updatenotes():
     cursor.execute('USE EMS')
-    nid = eval(input('Enter NID of note to update: '))
+    nid = int(input('Enter NID of note to update: '))
     cursor.execute('select * from Notes where NID={}'.format(nid))
     for rec in cursor:
         print(rec)
@@ -321,10 +317,14 @@ def empdeptwise():
 conti = 'y'
 while conti == 'y':
     print('')
-    print('Welcome to EMPLOYEE MANAGEMENT SYSTEM!')
-    print('Project Version 0.7, Revision 5')
     print('')
-    print('Currently Available Operations')
+    print('')
+    print('')
+    print('')
+    print('Welcome to EMPLOYEE MANAGEMENT SYSTEM!')
+    print('')
+    print('')
+    print('            Operation Menu            ')
     print('--------------------------------------')
     print('1. Generate Database and Tables')
     print('2. Regenerate Database and Tables')
