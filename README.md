@@ -1,8 +1,7 @@
 # EMS-SQL-Project
-Work-In-Progress Employee Management System Project made using Python and MySQL.
+Basic Employee Management System Project made using Python and MySQL.
 
 Please install the package first...
-
 
 
 ```
