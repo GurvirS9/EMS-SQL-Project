@@ -11,3 +11,5 @@ RUN THESE COMMANDS IN CMD.EXE
 pip install mysql-connector
 pip install mysql-connector-python
 ```
+
+Rebranded Version: https://github.com/GurvirS9/SMS-SQL-Project
